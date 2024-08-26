@@ -1,4 +1,4 @@
-package dto;
+package com.sparta.upscheduler.dto;
 
 public class ScheduleUserDTO {
     private Long scheduleId; // schedule_id

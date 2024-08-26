@@ -1,8 +1,11 @@
-package entity;
+package com.sparta.upscheduler.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-
+@Getter
+@Setter
 @Entity
 @Table(name = "schedule_users")
 public class ScheduleUser {
