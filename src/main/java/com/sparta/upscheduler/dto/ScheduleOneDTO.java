@@ -1,17 +1,18 @@
 package com.sparta.upscheduler.dto;
-import java.time.LocalDateTime;
-import lombok.Data;
 
+import lombok.Data;
+import java.time.LocalDateTime;
 import java.util.List;
 
-@Data  // Lombok을 사용하여 getter, setter, toString 등을 자동 생성
-public class ScheduleDTO {
+@Data
+public class ScheduleOneDTO {
     private Long id;
     private String title;
     private String description;
-    private String username;  // User 엔티티의 username
+    private String username;  // 작성 유저명
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private int commentCount; // 댓글 개수 추가
+    private int commentCount; // 댓글 개수
     private List<UserDTO> assignedUsers; // 담당 유저 정보 포함
 }
+

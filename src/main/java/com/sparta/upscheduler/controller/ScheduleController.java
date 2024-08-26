@@ -1,16 +1,12 @@
 package com.sparta.upscheduler.controller;
 
 import com.sparta.upscheduler.dto.ScheduleDTO;
-import com.sparta.upscheduler.entity.Schedule;
+import com.sparta.upscheduler.dto.ScheduleOneDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.sparta.upscheduler.service.ScheduleService;
-
-import java.time.LocalDateTime;
-
 
 
 @RestController
@@ -27,8 +23,8 @@ public class ScheduleController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ScheduleDTO> getSchedule(@PathVariable Long id) {
-        ScheduleDTO schedule = scheduleService.getSchedule(id);
+    public ResponseEntity<ScheduleOneDTO> getSchedule(@PathVariable Long id) {
+        ScheduleOneDTO schedule = scheduleService.getSchedule(id);
         return ResponseEntity.ok(schedule);
     }
 
