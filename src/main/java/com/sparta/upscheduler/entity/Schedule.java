@@ -29,8 +29,16 @@ public class Schedule {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<Comment> comments = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)  // 지연 로딩 설정
+    @JoinTable(
+            name = "schedule_users",
+            joinColumns = @JoinColumn(name = "schedule_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private Set<User> assignedUsers = new HashSet<>(); // 담당 유저 목록
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
