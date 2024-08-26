@@ -1,4 +1,4 @@
-package dto;
+package com.sparta.upscheduler.dto;
 
 import java.time.LocalDateTime;
 
