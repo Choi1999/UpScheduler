@@ -46,7 +46,7 @@ public class ScheduleService {
         size = (size == 0) ? 10 : size;
 
         Pageable pageable = (Pageable) PageRequest.of(page, size, Sort.by("updatedAt").descending());
-        Page<Schedule> schedules = scheduleRepository.findAll(pageable);
+        Page<Schedule> schedules = scheduleRepository.findAll((org.springframework.data.domain.Pageable) pageable);
 
         // Page<Schedule>을 Page<ScheduleDTO>로 변환
         return schedules.map(this::convertToDTO);
