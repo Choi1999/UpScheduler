@@ -12,4 +12,5 @@ public class ScheduleDTO {
     private String username;  // User 엔티티의 username
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private int commentCount; // 댓글 개수 추가
 }

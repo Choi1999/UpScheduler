@@ -4,9 +4,13 @@ import com.sparta.upscheduler.entity.Schedule;
 import com.sparta.upscheduler.entity.User;
 import com.sparta.upscheduler.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.sparta.upscheduler.repository.ScheduleRepository;
 
+import java.awt.print.Pageable;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +36,17 @@ public class ScheduleService {
 
         schedule = scheduleRepository.save(schedule);
         return convertToDTO(schedule);
+    }
+    // 일정 페이징 조회
+    public Page<ScheduleDTO> getSchedules(int page, int size) {
+        // 페이지 크기가 제공되지 않으면 기본값을 10으로 설정
+        size = (size == 0) ? 10 : size;
+
+        Pageable pageable = (Pageable) PageRequest.of(page, size, Sort.by("updatedAt").descending());
+        Page<Schedule> schedules = scheduleRepository.findAll(pageable);
+
+        // Page<Schedule>을 Page<ScheduleDTO>로 변환
+        return schedules.map(this::convertToDTO);
     }
 
     // 일정 단건 조회
@@ -68,6 +83,7 @@ public class ScheduleService {
         dto.setUsername(schedule.getUser().getUsername());
         dto.setCreatedAt(schedule.getCreatedAt());
         dto.setUpdatedAt(schedule.getUpdatedAt());
+        dto.setCommentCount(schedule.getComments().size());
         return dto;
     }
 }

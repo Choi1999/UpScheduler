@@ -3,6 +3,7 @@ package com.sparta.upscheduler.controller;
 import com.sparta.upscheduler.dto.ScheduleDTO;
 import com.sparta.upscheduler.entity.Schedule;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,5 +42,13 @@ public class ScheduleController {
     public ResponseEntity<Void> deleteSchedule(@PathVariable Long id) {
         scheduleService.deleteSchedule(id);
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping
+    public ResponseEntity<Page<ScheduleDTO>> getSchedules(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
+        Page<ScheduleDTO> schedules = scheduleService.getSchedules(page, size);
+        return ResponseEntity.ok(schedules);
     }
 }
